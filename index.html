@@ -17,8 +17,15 @@
 
   <h1>我們的江南之旅：你想去哪裡？</h1>
   
-  <label for="userName"><b>請輸入你的名字：</b></label>
-  <input type="text" id="userName" required style="padding: 5px; margin-bottom: 20px;">
+<label for="userName"><b>請選擇你的名字：</b></label>
+  <select id="userName" required style="padding: 5px; margin-bottom: 20px; font-size: 16px;">
+    <option value="" disabled selected>請選擇...</option>
+    <option value="江純瑾">江純瑾</option>
+    <option value="李悻玲">李悻玲</option>
+    <option value="江振禹">江振禹</option>
+    <option value="蔡秋育">蔡秋育</option>
+    <option value="江峻廷">江峻廷</option>
+  </select>
 
   <form id="travelForm">
     <div class="city-section">
