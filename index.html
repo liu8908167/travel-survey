@@ -1,120 +1,15 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>蘇杭上海景點挑選</title>
-  <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-    .city-section { margin-bottom: 30px; }
-    .spot { display: inline-block; width: 30%; margin: 1%; text-align: center; }
-    .spot img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
-    .submit-btn { display: block; width: 100%; padding: 15px; background-color: #4CAF50; color: white; border: none; font-size: 18px; cursor: pointer; border-radius: 8px; }
-    .submit-btn:hover { background-color: #45a049; }
-  </style>
-</head>
-<body>
-
-  <h1>我們的江南之旅：你想去哪裡？</h1>
-  
-<label for="userName"><b>請選擇你的名字：</b></label>
-  <select id="userName" required style="padding: 5px; margin-bottom: 20px; font-size: 16px;">
-    <option value="" disabled selected>請選擇...</option>
-    <option value="江純瑾">江純瑾</option>
-    <option value="李悻玲">李悻玲</option>
-    <option value="江振禹">江振禹</option>
-    <option value="蔡秋育">蔡秋育</option>
-    <option value="江峻廷">江峻廷</option>
-  </select>
-
-  <form id="travelForm">
-    <div class="city-section">
+<div class="city-section">
       <h2>上海</h2>
       <div class="spot">
         <label>
-          <img src="images/外灘.jpg" alt="外灘">
+          <img src="image/sh1.jpg" alt="外灘">
           <br><input type="checkbox" name="shanghai" value="外灘"> 外灘
         </label>
       </div>
       <div class="spot">
         <label>
-          <img src="images/shanghai-2.jpg" alt="東方明珠">
-          <br><input type="checkbox" name="shanghai" value="東方明珠"> 東方明珠
+          <img src="image/sh2.jpg" alt="豫園">
+          <br><input type="checkbox" name="shanghai" value="豫園"> 豫園
         </label>
       </div>
     </div>
-
-    <div class="city-section">
-      <h2>蘇州</h2>
-      <div class="spot">
-        <label>
-          <img src="images/suzhou-1.jpg" alt="拙政園">
-          <br><input type="checkbox" name="suzhou" value="拙政園"> 拙政園
-        </label>
-      </div>
-    </div>
-
-    <div class="city-section">
-      <h2>杭州</h2>
-      <div class="spot">
-        <label>
-          <img src="images/hangzhou-1.jpg" alt="西湖">
-          <br><input type="checkbox" name="hangzhou" value="西湖"> 西湖
-        </label>
-      </div>
-    </div>
-
-    <button type="button" class="submit-btn" onclick="submitData()">送出我的選擇！</button>
-  </form>
-
-  <script>
-    // ★★★ 最重要的一步：請把你剛剛複製的網址，貼到下方引號裡面，替換掉中文字 ★★★
-    const GAS_URL = "https://script.google.com/macros/s/AKfycbz6fzVYmAWsNjl7b_4--AxHPn56id9Dc5NJcJ77bE1POhCo33OVXUbsuAIDelGVTXFO/exec"; 
-
-    function submitData() {
-      const name = document.getElementById('userName').value;
-      if (!name) {
-        alert("請輸入名字喔！");
-        return;
-      }
-
-      const getCheckedValues = (nameAttr) => {
-        return Array.from(document.querySelectorAll(`input[name="${nameAttr}"]:checked`)).map(cb => cb.value);
-      };
-
-      const payload = {
-        name: name,
-        shanghai: getCheckedValues('shanghai'),
-        suzhou: getCheckedValues('suzhou'),
-        hangzhou: getCheckedValues('hangzhou')
-      };
-
-      const btn = document.querySelector('.submit-btn');
-      btn.innerText = "資料傳送中...";
-      btn.disabled = true;
-
-      fetch(GAS_URL, {
-        method: "POST",
-        body: JSON.stringify(payload)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if(data.result === "success"){
-          alert("送出成功！期待我們的旅行！");
-          document.getElementById('travelForm').reset();
-          document.getElementById('userName').value = '';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert("發生錯誤，請稍後再試。");
-      })
-      .finally(() => {
-        btn.innerText = "送出我的選擇！";
-        btn.disabled = false;
-      });
-    }
-  </script>
-
-</body>
-</html>
